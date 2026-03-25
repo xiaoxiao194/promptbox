@@ -6,7 +6,18 @@ import Link from "next/link";
 export default function CategoryPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const category = categories.find(c => c.id === id);
-  const categoryPrompts = useMemo(() => prompts.filter(p => p.category === id), [id]);
+  const categoryPrompts = useMemo(() => {
+    const diffOrder: Record<string, number> = { "新手": 1, "进阶": 2, "专家": 3 };
+    return prompts
+      .filter(p => p.category === id)
+      .sort((a, b) => {
+        // Hot first
+        if (a.hot && !b.hot) return -1;
+        if (!a.hot && b.hot) return 1;
+        // Then by difficulty
+        return (diffOrder[a.difficulty] || 9) - (diffOrder[b.difficulty] || 9);
+      });
+  }, [id]);
 
   if (!category) return <div className="p-12 text-center text-gray-400">分类不存在</div>;
 
