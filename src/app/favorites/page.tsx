@@ -2,6 +2,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { prompts, categories } from "@/data/prompts";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 export default function FavoritesPage() {
   const [favIds, setFavIds] = useState<string[]>([]);
@@ -20,16 +21,7 @@ export default function FavoritesPage() {
 
   return (
     <main className="fade-in">
-      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center gap-4">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl">📦</span>
-            <span className="font-bold text-xl text-gray-900 dark:text-white">Prompt<span className="gradient-text">Box</span></span>
-          </Link>
-          <span className="text-gray-300 dark:text-gray-600">/</span>
-          <span className="text-sm text-gray-600 dark:text-gray-400">⭐ 我的收藏</span>
-        </div>
-      </nav>
+      <Navbar breadcrumbs={[{ label: "⭐ 我的收藏" }]} />
 
       <div className="max-w-6xl mx-auto px-6 py-10">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">⭐ 我的收藏</h1>

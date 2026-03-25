@@ -2,6 +2,7 @@
 import { useState, useMemo } from "react";
 import { prompts, categories } from "@/data/prompts";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -20,22 +21,7 @@ export default function Home() {
 
   return (
     <main className="fade-in">
-      {/* Navbar */}
-      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl">📦</span>
-            <span className="font-bold text-xl text-gray-900 dark:text-white">Prompt<span className="gradient-text">Box</span></span>
-          </Link>
-          <div className="flex items-center gap-4 text-sm">
-            <Link href="/" className="text-indigo-600 dark:text-indigo-400 font-medium">文字提示词</Link>
-            <span className="text-gray-300 dark:text-gray-600">|</span>
-            <span className="text-gray-400 cursor-not-allowed">图片提示词 (Soon)</span>
-            <span className="text-gray-300 dark:text-gray-600">|</span>
-            <Link href="/favorites" className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400">⭐ 收藏</Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
