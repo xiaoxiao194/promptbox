@@ -266,7 +266,7 @@ export const prompts: Prompt[] = [
 5. 如有文化差异需要适当本地化
 6. 对于不确定的翻译，给出备选方案`,
     variables: [
-      { key: "domain", label: "专业领域", placeholder: "例：科技 / 医学 / 法律 / 文学" },
+      { key: "domain", label: "专业领域", placeholder: "例：科技 / 医学 / 法律 / 文学 / 技术文档" },
       { key: "targetLang", label: "目标语言", placeholder: "例：中文 / English" },
       { key: "content", label: "待翻译内容", placeholder: "粘贴需要翻译的文本..." },
     ],
@@ -678,29 +678,33 @@ export const prompts: Prompt[] = [
     hot: true,
   },
   {
-    id: "title-gen",
-    title: "爆款标题生成器",
-    description: "一个主题生成多个风格的吸睛标题",
-    category: "writing",
-    tags: ["标题", "爆款", "自媒体"],
-    platforms: ["ChatGPT", "Claude", "Kimi"],
-    difficulty: "新手",
-    prompt: `请为以下内容生成 15 个不同风格的标题：
+    id: "data-report",
+    title: "数据分析报告",
+    description: "输入原始数据，生成专业的分析报告和洞察",
+    category: "tools",
+    tags: ["数据", "分析", "报告"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `请帮我分析以下数据并生成报告：
 
-内容主题：{{topic}}
-目标平台：{{platform}}
+数据内容：
+{{data}}
 
-标题风格分组：
-1. 悬念型（3个）— 让人好奇想点
-2. 数字型（3个）— 用具体数字
-3. 对比型（3个）— 前后反差
-4. 痛点型（3个）— 直击读者痛点
-5. 热点型（3个）— 结合当下热词
+分析目的：{{purpose}}
 
-每个标题控制在 20-30 字，注意平台特点`,
+请输出：
+1. 📊 数据概览（关键指标汇总）
+2. 📈 趋势分析（上升/下降/波动）
+3. 🔍 异常点发现
+4. 💡 核心洞察（3-5条，每条用数据支撑）
+5. 📋 对比分析（如适用）
+6. 🎯 行动建议（基于数据的具体建议）
+7. 📝 一句话总结
+
+用图表描述（文字描述图表内容，方便后续制图）`,
     variables: [
-      { key: "topic", label: "内容主题", placeholder: "例：程序员如何提高工作效率" },
-      { key: "platform", label: "平台", placeholder: "例：公众号 / 知乎 / 小红书 / B站" },
+      { key: "data", label: "原始数据", placeholder: "粘贴数据（表格、数字、CSV等都可以）..." },
+      { key: "purpose", label: "分析目的", placeholder: "例：找出销售下降原因 / 用户增长趋势 / 投放效果评估" },
     ],
   },
   {
@@ -838,29 +842,31 @@ README 结构：
 
   // ===== 翻译（补充） =====
   {
-    id: "tech-translate",
-    title: "技术文档翻译",
-    description: "翻译技术文档，术语准确，保留代码格式",
-    category: "translate",
-    tags: ["技术文档", "开发者", "术语"],
+    id: "english-tutor",
+    title: "英语写作纠错",
+    description: "AI 纠正英语语法、用词和表达，给出修改建议",
+    category: "roleplay",
+    tags: ["英语", "纠错", "语法"],
     platforms: ["ChatGPT", "Claude"],
-    difficulty: "进阶",
-    prompt: `你是一位资深的技术文档翻译官，精通{{domain}}领域。
+    difficulty: "新手",
+    prompt: `你是一位专业的英语写作老师，母语为英语，同时精通中文。
 
-请翻译以下技术文档为{{targetLang}}：
+请帮我检查和修改以下英文内容：
 
 {{content}}
 
-翻译要求：
-1. 专业术语保持行业惯例（首次出现时附原文）
-2. 代码块、变量名、函数名不翻译
-3. 保持原文的 Markdown 格式
-4. API 参数描述要精准
-5. 如有歧义的术语，在脚注说明`,
+修改要求：
+1. 用 ~~删除线~~ 标出错误，**加粗**标出修改后的内容
+2. 每处修改说明错误类型（语法/用词/句式/拼写）
+3. 给出修改理由（用中文解释）
+4. 评估整体写作水平（初级/中级/高级）
+5. 给出 3 条提高建议
+6. 最后给出完整的修改后版本
+
+写作目的：{{purpose}}`,
     variables: [
-      { key: "domain", label: "技术领域", placeholder: "例：前端开发 / 机器学习 / 云计算" },
-      { key: "targetLang", label: "目标语言", placeholder: "例：中文 / English" },
-      { key: "content", label: "待翻译内容", placeholder: "粘贴技术文档..." },
+      { key: "content", label: "英文内容", placeholder: "粘贴你的英文写作..." },
+      { key: "purpose", label: "写作目的", placeholder: "例：商务邮件 / 学术论文 / 日常交流 / 雅思作文" },
     ],
   },
   {
