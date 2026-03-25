@@ -621,4 +621,673 @@ export const prompts: Prompt[] = [
       { key: "focus", label: "侧重方向", placeholder: "例：实操方法 / 理论框架 / 工具推荐" },
     ],
   },
+
+  // ====== 新增模板 ======
+
+  // ===== 写作（补充） =====
+  {
+    id: "rewrite-tone",
+    title: "文风改写大师",
+    description: "将同一段内容改写成不同风格",
+    category: "writing",
+    tags: ["改写", "风格", "润色"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "新手",
+    prompt: `请将以下内容改写为{{style}}风格：
+
+原文：
+{{content}}
+
+要求：
+1. 保留核心信息不变
+2. 完全改变语气和表达方式
+3. 适当调整句式结构
+4. 改写后的内容自然流畅，不像机翻`,
+    variables: [
+      { key: "style", label: "目标风格", placeholder: "例：幽默搞笑 / 文艺感性 / 学术严谨 / 毒舌犀利" },
+      { key: "content", label: "原文内容", placeholder: "粘贴需要改写的内容..." },
+    ],
+  },
+  {
+    id: "video-script",
+    title: "短视频脚本",
+    description: "生成抖音/B站短视频拍摄脚本",
+    category: "writing",
+    tags: ["短视频", "抖音", "脚本"],
+    platforms: ["ChatGPT", "Claude", "Kimi"],
+    difficulty: "进阶",
+    prompt: `你是一位百万粉丝的短视频创作者。请为以下主题写一个短视频脚本：
+
+主题：{{topic}}
+平台：{{platform}}
+时长：{{duration}}
+
+脚本格式：
+1. 🎬 开头钩子（前3秒抓住注意力）
+2. 📝 分镜脚本（画面描述 + 台词/字幕）
+3. 🎵 BGM 建议
+4. ✂️ 转场建议
+5. 📌 结尾引导（关注/点赞/评论话术）
+
+要求口播台词口语化，节奏紧凑不拖沓`,
+    variables: [
+      { key: "topic", label: "视频主题", placeholder: "例：5个被低估的效率工具" },
+      { key: "platform", label: "发布平台", placeholder: "例：抖音 / B站 / 视频号" },
+      { key: "duration", label: "视频时长", placeholder: "例：60秒 / 3分钟" },
+    ],
+    hot: true,
+  },
+  {
+    id: "title-gen",
+    title: "爆款标题生成器",
+    description: "一个主题生成多个风格的吸睛标题",
+    category: "writing",
+    tags: ["标题", "爆款", "自媒体"],
+    platforms: ["ChatGPT", "Claude", "Kimi"],
+    difficulty: "新手",
+    prompt: `请为以下内容生成 15 个不同风格的标题：
+
+内容主题：{{topic}}
+目标平台：{{platform}}
+
+标题风格分组：
+1. 悬念型（3个）— 让人好奇想点
+2. 数字型（3个）— 用具体数字
+3. 对比型（3个）— 前后反差
+4. 痛点型（3个）— 直击读者痛点
+5. 热点型（3个）— 结合当下热词
+
+每个标题控制在 20-30 字，注意平台特点`,
+    variables: [
+      { key: "topic", label: "内容主题", placeholder: "例：程序员如何提高工作效率" },
+      { key: "platform", label: "平台", placeholder: "例：公众号 / 知乎 / 小红书 / B站" },
+    ],
+  },
+  {
+    id: "book-review",
+    title: "书评/读后感",
+    description: "读完一本书后生成深度书评",
+    category: "writing",
+    tags: ["书评", "读书", "笔记"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `请帮我写一篇「{{bookName}}」的书评。
+
+我读完后的主要感受：{{feeling}}
+我希望书评的风格：{{style}}
+
+书评结构：
+1. 📖 一句话推荐语
+2. 📝 内容概要（不剧透，200字）
+3. 💡 核心观点提炼（3-5个）
+4. 🤔 我的思考和共鸣
+5. 📌 金句摘录（5句）
+6. ⭐ 推荐指数（1-5星）+ 适合谁读`,
+    variables: [
+      { key: "bookName", label: "书名", placeholder: "例：《纳瓦尔宝典》" },
+      { key: "feeling", label: "你的感受", placeholder: "例：对投资和人生选择有了新的理解" },
+      { key: "style", label: "书评风格", placeholder: "例：轻松分享型 / 深度分析型 / 简洁推荐型" },
+    ],
+  },
+
+  // ===== 编程（补充） =====
+  {
+    id: "api-design",
+    title: "API 接口设计",
+    description: "根据需求自动设计 RESTful API 接口",
+    category: "coding",
+    tags: ["API", "接口设计", "后端"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `请为以下业务需求设计 RESTful API 接口：
+
+业务场景：{{scenario}}
+技术栈：{{stack}}
+
+请输出：
+1. 接口列表（表格：方法 | 路径 | 说明 | 请求参数 | 响应格式）
+2. 数据库表设计（字段、类型、说明）
+3. 核心接口的请求/响应示例（JSON）
+4. 认证方案建议
+5. 错误码定义
+6. 接口版本管理建议`,
+    variables: [
+      { key: "scenario", label: "业务场景", placeholder: "例：一个博客系统，支持文章发布、评论、点赞、用户管理" },
+      { key: "stack", label: "技术栈", placeholder: "例：Node.js + Express + MySQL" },
+    ],
+  },
+  {
+    id: "sql-gen",
+    title: "SQL 语句生成",
+    description: "用自然语言描述需求，自动生成 SQL",
+    category: "coding",
+    tags: ["SQL", "数据库", "查询"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "新手",
+    prompt: `请根据以下描述生成 SQL 语句：
+
+数据库类型：{{dbType}}
+表结构描述：{{schema}}
+查询需求：{{requirement}}
+
+请提供：
+1. SQL 语句
+2. 逐行解释
+3. 性能优化建议（索引等）
+4. 如果是复杂查询，给出分步思路`,
+    variables: [
+      { key: "dbType", label: "数据库", placeholder: "例：MySQL / PostgreSQL / SQLite" },
+      { key: "schema", label: "表结构", placeholder: "例：users表(id, name, age, city)，orders表(id, user_id, amount, created_at)" },
+      { key: "requirement", label: "查询需求", placeholder: "例：查询每个城市消费金额前10的用户" },
+    ],
+  },
+  {
+    id: "git-commit",
+    title: "Git Commit 信息生成",
+    description: "根据代码变更生成规范的 commit message",
+    category: "coding",
+    tags: ["Git", "Commit", "规范"],
+    platforms: ["ChatGPT", "Claude", "Cursor"],
+    difficulty: "新手",
+    prompt: `请根据以下代码变更生成规范的 Git commit message：
+
+变更内容：
+{{changes}}
+
+要求：
+1. 遵循 Conventional Commits 规范
+2. 格式：type(scope): description
+3. type 类型：feat/fix/docs/style/refactor/perf/test/chore
+4. 给出 3 个版本：简洁版 / 标准版 / 详细版（带 body）
+5. 全部用英文`,
+    variables: [
+      { key: "changes", label: "代码变更描述", placeholder: "例：修复了用户登录时密码验证的bug，增加了密码长度校验" },
+    ],
+  },
+  {
+    id: "readme-gen",
+    title: "README 文档生成",
+    description: "为开源项目生成专业的 README",
+    category: "coding",
+    tags: ["README", "文档", "开源"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "新手",
+    prompt: `请为以下项目生成一份专业的 GitHub README.md：
+
+项目名：{{projectName}}
+项目描述：{{description}}
+技术栈：{{techStack}}
+主要功能：{{features}}
+
+README 结构：
+1. 项目标题 + 一句话描述 + 徽章（build/license/version）
+2. ✨ 功能特性（带 emoji 列表）
+3. 📸 截图/演示（占位符）
+4. 🚀 快速开始（安装 + 运行）
+5. 📖 使用文档
+6. 🗺️ 路线图（TODO）
+7. 🤝 贡献指南
+8. 📄 License`,
+    variables: [
+      { key: "projectName", label: "项目名", placeholder: "例：PromptBox" },
+      { key: "description", label: "项目描述", placeholder: "例：AI 提示词百宝箱" },
+      { key: "techStack", label: "技术栈", placeholder: "例：Next.js + TypeScript + Tailwind CSS" },
+      { key: "features", label: "主要功能", placeholder: "例：提示词模板库、一键复制、收藏管理" },
+    ],
+  },
+
+  // ===== 翻译（补充） =====
+  {
+    id: "tech-translate",
+    title: "技术文档翻译",
+    description: "翻译技术文档，术语准确，保留代码格式",
+    category: "translate",
+    tags: ["技术文档", "开发者", "术语"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `你是一位资深的技术文档翻译官，精通{{domain}}领域。
+
+请翻译以下技术文档为{{targetLang}}：
+
+{{content}}
+
+翻译要求：
+1. 专业术语保持行业惯例（首次出现时附原文）
+2. 代码块、变量名、函数名不翻译
+3. 保持原文的 Markdown 格式
+4. API 参数描述要精准
+5. 如有歧义的术语，在脚注说明`,
+    variables: [
+      { key: "domain", label: "技术领域", placeholder: "例：前端开发 / 机器学习 / 云计算" },
+      { key: "targetLang", label: "目标语言", placeholder: "例：中文 / English" },
+      { key: "content", label: "待翻译内容", placeholder: "粘贴技术文档..." },
+    ],
+  },
+  {
+    id: "multi-translate",
+    title: "多语言翻译",
+    description: "一次性翻译成多种语言",
+    category: "translate",
+    tags: ["多语言", "国际化", "批量"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "新手",
+    prompt: `请将以下内容翻译成以下语言：{{languages}}
+
+原文：
+{{content}}
+
+要求：
+1. 每种语言单独列出
+2. 翻译要地道自然
+3. 如果是 App/网站的 UI 文案，注意控制长度
+4. 标注可能需要注意的文化差异`,
+    variables: [
+      { key: "languages", label: "目标语言", placeholder: "例：英语、日语、韩语、法语" },
+      { key: "content", label: "原文内容", placeholder: "粘贴需要翻译的文本..." },
+    ],
+  },
+
+  // ===== 营销（补充） =====
+  {
+    id: "user-persona",
+    title: "用户画像生成",
+    description: "根据产品特征生成详细的目标用户画像",
+    category: "marketing",
+    tags: ["用户画像", "市场", "分析"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `请为「{{product}}」生成 3 个典型用户画像。
+
+每个画像包含：
+1. 👤 基本信息（姓名/年龄/职业/城市/收入）
+2. 🎯 核心需求和痛点
+3. 📱 常用 App 和信息渠道
+4. 🛍️ 消费习惯和决策因素
+5. 💬 可能说的一句话（代表性的吐槽或需求）
+6. 🔗 触达渠道建议（在哪里投广告能找到TA）
+
+3个画像要有差异：核心用户 / 潜在用户 / 边缘用户`,
+    variables: [
+      { key: "product", label: "产品/服务", placeholder: "例：一款AI写作助手App" },
+    ],
+  },
+  {
+    id: "social-calendar",
+    title: "社媒内容日历",
+    description: "生成一周/一月的社交媒体发帖计划",
+    category: "marketing",
+    tags: ["社交媒体", "内容计划", "运营"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `请为「{{account}}」制定一份 {{period}} 的社交媒体内容日历。
+
+平台：{{platform}}
+目标：{{goal}}
+品牌调性：{{tone}}
+
+每天的内容包含：
+1. 📅 日期和发布时间
+2. 📝 内容主题和类型（图文/视频/互动/转发）
+3. ✍️ 文案大纲（50字概要）
+4. 🏷️ 推荐标签
+5. 📊 预期互动形式
+
+要求内容类型多样化，节假日/热点穿插安排`,
+    variables: [
+      { key: "account", label: "账号/品牌", placeholder: "例：一个编程教育账号" },
+      { key: "period", label: "时间范围", placeholder: "例：1周 / 1个月" },
+      { key: "platform", label: "平台", placeholder: "例：小红书 / 抖音 / 微博" },
+      { key: "goal", label: "运营目标", placeholder: "例：涨粉500、提高互动率" },
+      { key: "tone", label: "账号调性", placeholder: "例：专业但接地气" },
+    ],
+  },
+  {
+    id: "launch-plan",
+    title: "产品发布文案包",
+    description: "一键生成产品发布所需的全套文案",
+    category: "marketing",
+    tags: ["产品发布", "文案", "全套"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `我的产品「{{product}}」即将发布，请帮我生成一套完整的发布文案：
+
+产品介绍：{{description}}
+核心卖点：{{highlights}}
+目标用户：{{audience}}
+
+请输出：
+1. 📢 Product Hunt 英文介绍（tagline + description）
+2. 🐦 Twitter/X 发布推文（3条不同版本）
+3. 📱 朋友圈文案
+4. 💬 微信群推广话术
+5. 📧 邮件通知模板
+6. 📝 公众号发布文章大纲
+7. 🏷️ 各平台推荐标签/关键词`,
+    variables: [
+      { key: "product", label: "产品名", placeholder: "例：PromptBox" },
+      { key: "description", label: "产品介绍", placeholder: "例：免费的AI提示词模板库" },
+      { key: "highlights", label: "核心卖点", placeholder: "例：20+分类、一键复制、变量填空" },
+      { key: "audience", label: "目标用户", placeholder: "例：AI用户、自媒体创作者" },
+    ],
+  },
+
+  // ===== 学习（补充） =====
+  {
+    id: "paper-summary",
+    title: "论文速读助手",
+    description: "快速理解和总结学术论文",
+    category: "study",
+    tags: ["论文", "学术", "总结"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `请帮我分析以下论文内容：
+
+论文标题/摘要：
+{{content}}
+
+请输出：
+1. 📋 一句话总结（30字内）
+2. 🎯 研究问题是什么
+3. 💡 核心方法/创新点
+4. 📊 主要实验结果
+5. 🤔 优势和局限性
+6. 🔗 和哪些已有工作相关
+7. ✅ 这篇论文值得深读吗？（给出理由）
+
+用通俗易懂的语言，避免过多术语`,
+    variables: [
+      { key: "content", label: "论文标题或摘要", placeholder: "粘贴论文标题和摘要..." },
+    ],
+  },
+  {
+    id: "flashcard",
+    title: "记忆卡片生成",
+    description: "将知识点转化为问答形式的记忆卡片",
+    category: "study",
+    tags: ["记忆", "复习", "卡片"],
+    platforms: ["ChatGPT", "Claude", "Kimi"],
+    difficulty: "新手",
+    prompt: `请将以下知识点转化为记忆卡片（Q&A 格式）：
+
+学科/领域：{{subject}}
+知识内容：
+{{content}}
+
+要求：
+1. 生成 {{count}} 张记忆卡片
+2. 每张卡片：正面是问题，背面是简洁答案
+3. 问题类型多样化（定义、对比、应用、判断）
+4. 从易到难排列
+5. 答案简洁精准，便于快速记忆`,
+    variables: [
+      { key: "subject", label: "学科", placeholder: "例：JavaScript 基础 / 高中生物" },
+      { key: "content", label: "知识内容", placeholder: "粘贴需要记忆的知识点..." },
+      { key: "count", label: "卡片数量", placeholder: "例：15" },
+    ],
+  },
+
+  // ===== 办公（补充） =====
+  {
+    id: "meeting-minutes",
+    title: "会议纪要生成",
+    description: "根据会议记录生成结构化纪要",
+    category: "office",
+    tags: ["会议", "纪要", "记录"],
+    platforms: ["ChatGPT", "Claude", "Kimi"],
+    difficulty: "新手",
+    prompt: `请将以下会议记录整理成结构化的会议纪要：
+
+原始记录：
+{{notes}}
+
+纪要格式：
+1. 📅 会议信息（日期/参会人/时长）
+2. 📋 会议议题
+3. 💬 讨论要点（分议题整理）
+4. ✅ 达成的决议
+5. 📌 行动项（责任人 + 截止时间 + 任务描述）
+6. ❓ 待定事项
+7. 📅 下次会议安排
+
+语言简洁专业，重点突出行动项`,
+    variables: [
+      { key: "notes", label: "会议记录", placeholder: "粘贴你的会议笔记或语音转文字内容..." },
+    ],
+  },
+  {
+    id: "ppt-outline",
+    title: "PPT 大纲生成",
+    description: "根据主题生成完整的演示文稿大纲",
+    category: "office",
+    tags: ["PPT", "演示", "大纲"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `请为以下主题生成一份 PPT 大纲：
+
+主题：{{topic}}
+演讲场景：{{scenario}}
+时长：{{duration}}
+听众：{{audience}}
+
+要求：
+1. 封面页（标题 + 副标题）
+2. 目录页
+3. 每页 PPT 内容：标题 + 要点（3-5点）+ 建议的视觉元素
+4. 过渡页（章节之间）
+5. 总结页
+6. 致谢/Q&A 页
+
+总共 {{slides}} 页左右，控制信息密度`,
+    variables: [
+      { key: "topic", label: "PPT 主题", placeholder: "例：2024年度产品规划" },
+      { key: "scenario", label: "场景", placeholder: "例：部门汇报 / 客户提案 / 技术分享" },
+      { key: "duration", label: "演讲时长", placeholder: "例：15分钟" },
+      { key: "audience", label: "听众", placeholder: "例：公司高管 / 技术团队 / 客户" },
+      { key: "slides", label: "页数", placeholder: "例：20" },
+    ],
+  },
+  {
+    id: "okr-gen",
+    title: "OKR 制定助手",
+    description: "帮你制定科学的目标与关键成果",
+    category: "office",
+    tags: ["OKR", "目标", "绩效"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `请帮我制定本{{period}}的 OKR。
+
+我的角色：{{role}}
+团队/业务方向：{{direction}}
+上级目标：{{upperGoal}}
+
+要求：
+1. 制定 2-3 个 Objective（定性目标，鼓舞人心）
+2. 每个 O 下面 3-4 个 Key Results（可量化、有截止时间）
+3. 每个 KR 标注信心指数（1-10分）
+4. 给出实现每个 KR 的具体行动计划
+5. 标注风险和依赖项`,
+    variables: [
+      { key: "period", label: "时间周期", placeholder: "例：季度 / 半年" },
+      { key: "role", label: "你的角色", placeholder: "例：前端技术负责人" },
+      { key: "direction", label: "业务方向", placeholder: "例：用户增长和产品体验优化" },
+      { key: "upperGoal", label: "上级目标", placeholder: "例：Q2 活跃用户增长30%" },
+    ],
+  },
+
+  // ===== 角色扮演（补充） =====
+  {
+    id: "psychologist",
+    title: "心理咨询师",
+    description: "AI 扮演心理咨询师进行情绪疏导",
+    category: "roleplay",
+    tags: ["心理", "情绪", "咨询"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "新手",
+    prompt: `你是一位有 20 年经验的心理咨询师，擅长认知行为疗法。
+
+咨询规则：
+1. 先倾听和共情，不要急于给建议
+2. 用温暖但专业的语气
+3. 适时提出引导性问题，帮助来访者自我觉察
+4. 避免评判和说教
+5. 如果涉及严重心理问题，建议寻求专业线下帮助
+
+我现在的困扰：{{concern}}
+
+请开始我们的对话。`,
+    variables: [
+      { key: "concern", label: "你的困扰", placeholder: "例：最近工作压力很大，经常焦虑失眠" },
+    ],
+  },
+  {
+    id: "debate-partner",
+    title: "辩论陪练",
+    description: "AI 扮演对方辩手训练辩论能力",
+    category: "roleplay",
+    tags: ["辩论", "思维", "训练"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `你是一位经验丰富的辩手，现在请站在「{{side}}」的立场和我辩论。
+
+辩题：{{topic}}
+我的立场：{{mySide}}
+
+辩论规则：
+1. 每次发言控制在 200 字内
+2. 论点要有逻辑和证据支撑
+3. 主动攻击我论点的薄弱环节
+4. 使用反问、类比、数据等辩论技巧
+5. 辩论结束后（5轮），给我的表现打分并指出改进点
+
+请开始你的立论。`,
+    variables: [
+      { key: "topic", label: "辩题", placeholder: "例：人工智能是否会取代大部分人类工作" },
+      { key: "side", label: "对方立场", placeholder: "例：反方 — AI不会取代人类" },
+      { key: "mySide", label: "我的立场", placeholder: "例：正方 — AI会取代大部分工作" },
+    ],
+  },
+  {
+    id: "product-manager",
+    title: "产品经理模拟",
+    description: "AI扮演产品经理帮你梳理需求",
+    category: "roleplay",
+    tags: ["产品", "需求", "PRD"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "进阶",
+    prompt: `你是一位有 10 年经验的产品经理。我有一个产品想法，请帮我梳理需求：
+
+产品想法：{{idea}}
+
+请按以下步骤引导我：
+1. 先问我 5 个关键问题（目标用户、痛点、场景等）
+2. 根据我的回答，输出：
+   - 产品定位（一句话）
+   - 用户故事（3-5个 As a... I want... So that...）
+   - 核心功能列表（MVP 版本）
+   - 功能优先级排序（P0/P1/P2）
+   - 简易竞品分析
+   - 第一版迭代计划
+
+请开始提问。`,
+    variables: [
+      { key: "idea", label: "产品想法", placeholder: "例：一个帮助自由职业者管理项目和客户的工具" },
+    ],
+  },
+
+  // ===== 实用工具（补充） =====
+  {
+    id: "daily-plan",
+    title: "每日计划生成",
+    description: "根据任务清单生成高效的日程安排",
+    category: "tools",
+    tags: ["日程", "时间管理", "计划"],
+    platforms: ["ChatGPT", "Claude", "Kimi"],
+    difficulty: "新手",
+    prompt: `请帮我安排今天的日程。
+
+今天要做的事：
+{{tasks}}
+
+约束条件：
+- 可用时间：{{timeRange}}
+- 精力高峰期：{{peakTime}}
+- 必须固定的时间：{{fixedTime}}
+
+安排要求：
+1. 按番茄工作法（25分钟工作+5分钟休息）
+2. 高难度任务放在精力高峰期
+3. 相似任务集中处理
+4. 午饭后安排轻松任务
+5. 每个任务标注预计时长和优先级
+6. 表格格式输出（时间 | 任务 | 时长 | 优先级）`,
+    variables: [
+      { key: "tasks", label: "任务清单", placeholder: "例：\n- 写周报\n- 开产品评审会\n- 修2个bug\n- 回复邮件\n- 学习React" },
+      { key: "timeRange", label: "可用时间", placeholder: "例：9:00-18:00" },
+      { key: "peakTime", label: "精力最好的时段", placeholder: "例：上午10-12点" },
+      { key: "fixedTime", label: "固定安排", placeholder: "例：14:00有个会议" },
+    ],
+  },
+  {
+    id: "contract-review",
+    title: "合同条款审查",
+    description: "帮你审查合同中的风险条款",
+    category: "tools",
+    tags: ["合同", "法律", "审查"],
+    platforms: ["ChatGPT", "Claude"],
+    difficulty: "专家",
+    prompt: `请帮我审查以下合同条款，找出潜在风险：
+
+合同类型：{{contractType}}
+我的身份：{{myRole}}
+合同内容：
+{{content}}
+
+请分析：
+1. ⚠️ 高风险条款标注（逐条说明风险点）
+2. 📌 缺失的保护性条款
+3. 🔍 模糊/歧义表达
+4. 💡 修改建议（给出替代措辞）
+5. ✅ 合理的条款确认
+
+⚠️ 声明：AI 分析仅供参考，重要合同请咨询专业律师`,
+    variables: [
+      { key: "contractType", label: "合同类型", placeholder: "例：劳动合同 / 租房合同 / 合作协议" },
+      { key: "myRole", label: "你的身份", placeholder: "例：员工 / 租客 / 甲方" },
+      { key: "content", label: "合同内容", placeholder: "粘贴需要审查的合同条款..." },
+    ],
+  },
+  {
+    id: "travel-plan",
+    title: "旅行计划助手",
+    description: "根据偏好生成详细的旅行攻略",
+    category: "tools",
+    tags: ["旅行", "攻略", "计划"],
+    platforms: ["ChatGPT", "Claude", "Kimi"],
+    difficulty: "新手",
+    prompt: `请帮我制定一份旅行计划。
+
+目的地：{{destination}}
+出行时间：{{dates}}
+天数：{{days}} 天
+人数：{{people}}
+预算：{{budget}}
+偏好：{{preference}}
+
+请输出：
+1. 📅 每日行程安排（景点+交通+餐饮）
+2. 🏨 住宿区域推荐
+3. 🍜 必吃美食清单
+4. 💰 预算分配建议
+5. ⚠️ 注意事项和Tips
+6. 📦 行李清单`,
+    variables: [
+      { key: "destination", label: "目的地", placeholder: "例：日本东京+京都" },
+      { key: "dates", label: "出行时间", placeholder: "例：4月中旬" },
+      { key: "days", label: "天数", placeholder: "例：7" },
+      { key: "people", label: "人数和关系", placeholder: "例：2人，情侣" },
+      { key: "budget", label: "预算", placeholder: "例：人均1万元" },
+      { key: "preference", label: "偏好", placeholder: "例：喜欢美食和文化体验，不喜欢赶行程" },
+    ],
+    hot: true,
+  },
 ];
