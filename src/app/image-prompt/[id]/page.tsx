@@ -34,6 +34,9 @@ export default function ImagePromptPage({ params }: { params: Promise<{ id: stri
     product: "产品", dish: "菜品", topic: "主题",
     color_scheme: "配色方案", event: "活动", genre: "类型",
     title: "标题", position: "位置",
+    room: "房间类型", materials: "材质",
+    building_type: "建筑类型", environment: "周围环境",
+    character: "角色", action: "动作/姿势",
   };
 
   const filledEn = useMemo(() => {
