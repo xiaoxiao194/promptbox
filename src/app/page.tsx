@@ -11,19 +11,21 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [tab, setTab] = useState<"text" | "image">("text");
 
-  const hotAll = useMemo(() => {
-    const textHot = prompts.filter(p => p.hot).map(p => ({
-      id: p.id, title: p.title, desc: p.description, type: "text" as const,
-      href: `/prompt/${p.id}`, tags: p.platforms, icon: categories.find(c => c.id === p.category)?.icon || "",
-      catName: categories.find(c => c.id === p.category)?.name || "",
-    }));
-    const imgHot = imagePrompts.filter(p => p.hot).map(p => ({
-      id: p.id, title: p.title, desc: p.description, type: "image" as const,
-      href: `/image-prompt/${p.id}`, tags: p.platforms, icon: imageCategories.find(c => c.id === p.category)?.icon || "",
-      catName: imageCategories.find(c => c.id === p.category)?.name || "",
-    }));
-    return [...textHot, ...imgHot].slice(0, 6);
-  }, []);
+  const hotForTab = useMemo(() => {
+    if (tab === "text") {
+      return prompts.filter(p => p.hot).slice(0, 6).map(p => ({
+        id: p.id, title: p.title, desc: p.description, type: "text" as const,
+        href: `/prompt/${p.id}`, tags: p.platforms, icon: categories.find(c => c.id === p.category)?.icon || "",
+        catName: categories.find(c => c.id === p.category)?.name || "",
+      }));
+    } else {
+      return imagePrompts.filter(p => p.hot).slice(0, 6).map(p => ({
+        id: p.id, title: p.title, desc: p.description, type: "image" as const,
+        href: `/image-prompt/${p.id}`, tags: p.platforms, icon: imageCategories.find(c => c.id === p.category)?.icon || "",
+        catName: imageCategories.find(c => c.id === p.category)?.name || "",
+      }));
+    }
+  }, [tab]);
 
   const filteredResults = useMemo(() => {
     if (!search.trim()) return [];
@@ -135,9 +137,11 @@ export default function Home() {
 
       {/* 精选推荐 — 混合文字+图片，只展示 6 个 */}
       <section className="max-w-6xl mx-auto px-6 pb-20">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">🔥 精选推荐</h2>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+          🔥 {tab === "text" ? "热门文字提示词" : "热门图片提示词"}
+        </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {hotAll.map((p) => (
+          {hotForTab.map((p) => (
             <Link key={p.id} href={p.href} className={`group bg-white dark:bg-gray-800/60 rounded-2xl p-5 border border-gray-100 dark:border-gray-700/50 hover:shadow-lg hover:-translate-y-1 transition-all ${p.type === "image" ? "hover:border-purple-200 dark:hover:border-purple-700" : "hover:border-indigo-200 dark:hover:border-indigo-700"}`}>
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-lg">{p.icon}</span>
