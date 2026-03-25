@@ -4,6 +4,8 @@ import { prompts, categories } from "@/data/prompts";
 import { imagePrompts, imageCategories } from "@/data/imagePrompts";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -197,11 +199,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="text-center py-8 text-xs text-gray-400 dark:text-gray-500">
-        <p>✨ PromptBox — 免费 AI 提示词百宝箱</p>
-        <p className="mt-1">所有提示词模板免费使用，持续更新中</p>
-      </footer>
+      <Footer />
+      <BackToTop />
     </main>
   );
 }
