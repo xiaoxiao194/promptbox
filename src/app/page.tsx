@@ -111,7 +111,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="text-center py-8 text-xs text-gray-400 dark:text-gray-500">
-        <p>📦 PromptBox — 免费 AI 提示词百宝箱</p>
+        <p>✨ PromptBox — 免费 AI 提示词百宝箱</p>
         <p className="mt-1">所有提示词模板免费使用，持续更新中</p>
       </footer>
     </main>
