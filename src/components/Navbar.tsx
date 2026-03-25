@@ -32,7 +32,7 @@ export default function Navbar({ breadcrumbs }: NavbarProps) {
             <div className="hidden sm:flex items-center gap-3 text-sm mr-2">
               <Link href="/" className="text-indigo-600 dark:text-indigo-400 font-medium">文字提示词</Link>
               <span className="text-gray-300 dark:text-gray-600">|</span>
-              <span className="text-gray-400 cursor-not-allowed">图片提示词 (Soon)</span>
+              <Link href="/image" className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400">🎨 图片提示词</Link>
               <span className="text-gray-300 dark:text-gray-600">|</span>
               <Link href="/favorites" className="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400">⭐ 收藏</Link>
             </div>

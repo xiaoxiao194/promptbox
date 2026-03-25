@@ -1,0 +1,258 @@
+export interface ImagePrompt {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  platforms: string[];
+  prompt: string;
+  promptCn: string;
+  params?: string;
+  tags: string[];
+  hot?: boolean;
+}
+
+export interface ImageCategory {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+}
+
+export const imageCategories: ImageCategory[] = [
+  { id: "portrait", name: "人像摄影", icon: "👤", description: "肖像、写真、时尚人像" },
+  { id: "landscape", name: "风景自然", icon: "🏔️", description: "风光、自然、城市夜景" },
+  { id: "illustration", name: "插画设计", icon: "🎨", description: "扁平插画、水彩、动漫" },
+  { id: "logo", name: "Logo 图标", icon: "💎", description: "品牌Logo、App图标、徽章" },
+  { id: "ecommerce", name: "电商产品", icon: "🛍️", description: "产品摄影、场景图、白底图" },
+  { id: "poster", name: "海报封面", icon: "🖼️", description: "社交媒体、公众号封面、活动海报" },
+];
+
+export const imagePrompts: ImagePrompt[] = [
+  // ===== 人像摄影 =====
+  {
+    id: "ip-cinematic-portrait",
+    title: "电影感人像",
+    description: "电影质感的人物肖像，柔和光影",
+    category: "portrait",
+    platforms: ["Midjourney", "Stable Diffusion"],
+    prompt: "Cinematic portrait of a {{subject}}, soft golden hour lighting, shallow depth of field, film grain, shot on 35mm lens, bokeh background, warm color grading, editorial photography --ar 3:4 --v 6",
+    promptCn: "电影感肖像，{{subject}}，柔和的黄金时段光线，浅景深，胶片颗粒，35mm镜头拍摄，散景背景，暖色调调色，编辑级摄影",
+    params: "--ar 3:4 竖版人像比例 | --v 6 最新版本",
+    tags: ["电影感", "肖像", "光影"],
+    hot: true,
+  },
+  {
+    id: "ip-fashion-editorial",
+    title: "时尚大片",
+    description: "杂志级时尚人像摄影",
+    category: "portrait",
+    platforms: ["Midjourney"],
+    prompt: "High fashion editorial photography, {{subject}} wearing {{outfit}}, {{background}} background, dramatic studio lighting, Vogue magazine style, ultra-detailed skin texture, sharp focus, 85mm portrait lens --ar 3:4 --v 6 --s 750",
+    promptCn: "高级时尚编辑摄影，{{subject}}穿着{{outfit}}，{{background}}背景，戏剧性工作室灯光，Vogue杂志风格，超细腻皮肤质感，锐利对焦，85mm人像镜头",
+    params: "--s 750 高风格化 | --ar 3:4 竖版",
+    tags: ["时尚", "杂志", "大片"],
+  },
+  {
+    id: "ip-anime-character",
+    title: "动漫角色",
+    description: "日系动漫风格的角色设计",
+    category: "portrait",
+    platforms: ["Midjourney", "Stable Diffusion", "DALL·E"],
+    prompt: "Anime style character, {{character_desc}}, {{expression}} expression, detailed eyes with light reflections, {{hair_style}} hair, clean line art, vibrant colors, studio Ghibli inspired, 4k illustration --ar 3:4 --niji 6",
+    promptCn: "动漫风格角色，{{character_desc}}，{{expression}}表情，带光线反射的精致眼睛，{{hair_style}}发型，干净线条，鲜艳色彩，吉卜力工作室风格，4K插画",
+    params: "--niji 6 动漫专用模型 | --ar 3:4",
+    tags: ["动漫", "角色设计", "二次元"],
+    hot: true,
+  },
+
+  // ===== 风景自然 =====
+  {
+    id: "ip-dreamy-landscape",
+    title: "梦幻风光",
+    description: "超现实的梦幻自然风景",
+    category: "landscape",
+    platforms: ["Midjourney", "Stable Diffusion"],
+    prompt: "Breathtaking landscape photography, {{scene}}, ethereal atmosphere, volumetric lighting, morning mist, reflections in crystal clear water, ultra-wide angle, National Geographic quality, 8k resolution --ar 16:9 --v 6 --s 800",
+    promptCn: "令人叹为观止的风景摄影，{{scene}}，空灵氛围，体积光，晨雾，清澈水面倒影，超广角，国家地理品质，8K分辨率",
+    params: "--ar 16:9 宽屏风景 | --s 800 高风格化",
+    tags: ["风景", "自然", "梦幻"],
+    hot: true,
+  },
+  {
+    id: "ip-cyberpunk-city",
+    title: "赛博朋克城市",
+    description: "未来科幻感的城市夜景",
+    category: "landscape",
+    platforms: ["Midjourney", "Stable Diffusion"],
+    prompt: "Cyberpunk cityscape at night, neon lights reflecting on wet streets, holographic advertisements, flying vehicles, dense urban architecture, rain, {{mood}} atmosphere, blade runner inspired, cinematic wide shot --ar 21:9 --v 6",
+    promptCn: "赛博朋克城市夜景，霓虹灯在湿润街道上的反射，全息广告，飞行器，密集城市建筑，雨天，{{mood}}氛围，银翼杀手风格，电影宽画幅",
+    params: "--ar 21:9 超宽电影比例",
+    tags: ["赛博朋克", "科幻", "夜景"],
+  },
+  {
+    id: "ip-chinese-landscape",
+    title: "中国山水画风",
+    description: "水墨画风格的中国传统山水",
+    category: "landscape",
+    platforms: ["Midjourney", "Stable Diffusion", "DALL·E"],
+    prompt: "Traditional Chinese ink wash painting style, {{scene}}, misty mountains, flowing waterfall, pine trees, small pavilion, a lone figure on a bridge, subtle color tones, rice paper texture, Song Dynasty landscape painting style --ar 2:3 --v 6 --s 600",
+    promptCn: "中国传统水墨画风格，{{scene}}，云雾缭绕的山峦，飞流瀑布，松树，小亭子，桥上的孤独身影，淡雅色调，宣纸质感，宋代山水画风",
+    params: "--ar 2:3 竖版 | --s 600 适中风格化",
+    tags: ["水墨", "国风", "山水"],
+  },
+
+  // ===== 插画设计 =====
+  {
+    id: "ip-flat-illustration",
+    title: "扁平化插画",
+    description: "现代简约的扁平设计插画",
+    category: "illustration",
+    platforms: ["Midjourney", "DALL·E"],
+    prompt: "Modern flat design illustration, {{scene}}, minimalist style, geometric shapes, limited color palette of {{colors}}, clean vector art, no outlines, subtle gradients, Dribbble trending style --ar 4:3 --v 6",
+    promptCn: "现代扁平设计插画，{{scene}}，极简风格，几何形状，{{colors}}配色，干净矢量艺术，无描边，微妙渐变，Dribbble热门风格",
+    params: "--ar 4:3 展示用比例",
+    tags: ["扁平", "极简", "矢量"],
+  },
+  {
+    id: "ip-watercolor",
+    title: "水彩插画",
+    description: "通透清新的水彩画风格",
+    category: "illustration",
+    platforms: ["Midjourney", "Stable Diffusion"],
+    prompt: "Watercolor illustration of {{subject}}, soft flowing colors, wet-on-wet technique, paper texture visible, {{mood}} mood, delicate brush strokes, splatter effects at edges, transparent layers, botanical illustration style --ar 4:5 --v 6",
+    promptCn: "{{subject}}的水彩插画，柔和流动的色彩，湿画法技法，可见纸张纹理，{{mood}}情绪，细腻笔触，边缘飞溅效果，透明层次，植物插画风格",
+    params: "--ar 4:5 接近正方形",
+    tags: ["水彩", "清新", "手绘"],
+  },
+  {
+    id: "ip-3d-cartoon",
+    title: "3D 卡通角色",
+    description: "皮克斯风格的 3D 卡通渲染",
+    category: "illustration",
+    platforms: ["Midjourney", "DALL·E"],
+    prompt: "3D cartoon character, {{character_desc}}, Pixar style rendering, soft ambient lighting, smooth plastic-like material, rounded features, {{expression}} expression, pastel color background, subsurface scattering on skin, octane render --ar 1:1 --v 6",
+    promptCn: "3D卡通角色，{{character_desc}}，皮克斯风格渲染，柔和环境光，光滑塑料质感，圆润特征，{{expression}}表情，柔和色背景，皮肤次表面散射，Octane渲染",
+    params: "--ar 1:1 正方形头像",
+    tags: ["3D", "卡通", "皮克斯"],
+    hot: true,
+  },
+
+  // ===== Logo 图标 =====
+  {
+    id: "ip-minimal-logo",
+    title: "极简 Logo",
+    description: "简约现代的品牌标志设计",
+    category: "logo",
+    platforms: ["Midjourney", "DALL·E"],
+    prompt: "Minimal logo design for {{brand}}, {{industry}} industry, simple geometric mark, {{style}} style, clean lines, single color on white background, scalable, professional, timeless design, behance award winning --ar 1:1 --v 6",
+    promptCn: "{{brand}}的极简Logo设计，{{industry}}行业，简洁几何图形，{{style}}风格，干净线条，白底单色，可缩放，专业，经典设计，Behance获奖作品",
+    params: "--ar 1:1 正方形",
+    tags: ["Logo", "极简", "品牌"],
+    hot: true,
+  },
+  {
+    id: "ip-app-icon",
+    title: "App 图标",
+    description: "iOS/Android 风格的应用图标",
+    category: "logo",
+    platforms: ["Midjourney", "DALL·E"],
+    prompt: "Mobile app icon design, {{app_concept}}, iOS style, rounded square shape, 3D rendered, soft gradient background of {{colors}}, centered simple symbol, glossy finish, no text, Apple design guidelines --ar 1:1 --v 6",
+    promptCn: "移动应用图标设计，{{app_concept}}，iOS风格，圆角方形，3D渲染，{{colors}}柔和渐变背景，居中简洁符号，光泽质感，无文字，苹果设计规范",
+    params: "--ar 1:1",
+    tags: ["App", "图标", "iOS"],
+  },
+  {
+    id: "ip-vintage-badge",
+    title: "复古徽章",
+    description: "复古风格的徽章/印章设计",
+    category: "logo",
+    platforms: ["Midjourney", "Stable Diffusion"],
+    prompt: "Vintage badge logo, {{theme}}, retro emblem style, circular design, ornate border details, banner ribbon with text \"{{text}}\", worn texture, {{colors}} color scheme, hand-drawn engraving style, letterpress print look --ar 1:1 --v 6",
+    promptCn: "复古徽章Logo，{{theme}}，复古纹章风格，圆形设计，精致边框细节，丝带横幅文字\"{{text}}\"，做旧纹理，{{colors}}配色，手绘雕刻风格，活字印刷质感",
+    params: "--ar 1:1",
+    tags: ["复古", "徽章", "印章"],
+  },
+
+  // ===== 电商产品 =====
+  {
+    id: "ip-product-hero",
+    title: "产品主图",
+    description: "电商产品的高级展示主图",
+    category: "ecommerce",
+    platforms: ["Midjourney", "Stable Diffusion"],
+    prompt: "Professional product photography, {{product}}, {{background}} background, studio lighting with soft shadows, hero shot angle, premium feel, high-end advertising style, razor sharp focus, 8k commercial photography --ar 1:1 --v 6 --s 500",
+    promptCn: "专业产品摄影，{{product}}，{{background}}背景，工作室灯光配柔和阴影，英雄角度拍摄，高级质感，高端广告风格，极致锐利对焦，8K商业摄影",
+    params: "--ar 1:1 电商主图 | --s 500 适中风格化",
+    tags: ["产品", "电商", "主图"],
+    hot: true,
+  },
+  {
+    id: "ip-lifestyle-scene",
+    title: "场景化产品图",
+    description: "产品融入生活场景的展示图",
+    category: "ecommerce",
+    platforms: ["Midjourney", "DALL·E"],
+    prompt: "Lifestyle product photography, {{product}} placed in {{scene}}, natural daylight from window, cozy atmosphere, shallow depth of field, Instagram aesthetic, warm tones, editorial composition, organic textures around --ar 4:5 --v 6",
+    promptCn: "生活方式产品摄影，{{product}}放置在{{scene}}中，窗户自然光，温馨氛围，浅景深，Instagram美学，暖色调，编辑级构图，周围有机质感",
+    params: "--ar 4:5 社交媒体比例",
+    tags: ["场景", "生活方式", "氛围"],
+  },
+  {
+    id: "ip-food-photo",
+    title: "美食摄影",
+    description: "让人食欲大开的美食摄影",
+    category: "ecommerce",
+    platforms: ["Midjourney", "Stable Diffusion"],
+    prompt: "Professional food photography, {{dish}}, top-down flat lay composition, rustic wooden table, fresh ingredients scattered around, steam rising, natural side lighting, shallow depth of field, Michelin restaurant quality, food styling --ar 1:1 --v 6 --s 600",
+    promptCn: "专业美食摄影，{{dish}}，俯拍平铺构图，质朴木桌，周围散落新鲜食材，蒸汽升腾，自然侧光，浅景深，米其林餐厅品质，食物造型艺术",
+    params: "--ar 1:1 | --s 600",
+    tags: ["美食", "摄影", "餐饮"],
+  },
+
+  // ===== 海报封面 =====
+  {
+    id: "ip-wechat-cover",
+    title: "公众号封面",
+    description: "微信公众号文章封面图",
+    category: "poster",
+    platforms: ["Midjourney", "DALL·E"],
+    prompt: "WeChat article cover image, {{topic}} theme, modern graphic design, bold visual metaphor, {{color_scheme}} color palette, clean composition with space for text overlay, eye-catching, minimal but impactful, magazine cover quality --ar 2.35:1 --v 6",
+    promptCn: "微信文章封面图，{{topic}}主题，现代平面设计，大胆视觉隐喻，{{color_scheme}}配色，干净构图留出文字空间，吸睛，简约但有冲击力，杂志封面品质",
+    params: "--ar 2.35:1 公众号封面比例",
+    tags: ["公众号", "封面", "自媒体"],
+    hot: true,
+  },
+  {
+    id: "ip-social-post",
+    title: "社交媒体配图",
+    description: "小红书/Instagram 风格的精致配图",
+    category: "poster",
+    platforms: ["Midjourney", "DALL·E"],
+    prompt: "Aesthetic social media post image, {{theme}}, {{style}} style, soft pastel colors, visually pleasing composition, Instagram-worthy, trendy design elements, clean and minimal, high quality --ar 4:5 --v 6",
+    promptCn: "美学社交媒体配图，{{theme}}，{{style}}风格，柔和马卡龙色系，视觉舒适的构图，Instagram级别，潮流设计元素，干净极简，高品质",
+    params: "--ar 4:5 小红书/Instagram 比例",
+    tags: ["小红书", "Instagram", "配图"],
+  },
+  {
+    id: "ip-event-poster",
+    title: "活动海报",
+    description: "吸引眼球的活动宣传海报",
+    category: "poster",
+    platforms: ["Midjourney", "Stable Diffusion"],
+    prompt: "Event promotional poster design, {{event}} theme, {{style}} style, bold typography area at top, dynamic composition, vibrant {{colors}} colors, energetic mood, visual hierarchy, print-ready quality, negative space for text --ar 2:3 --v 6 --s 700",
+    promptCn: "活动宣传海报设计，{{event}}主题，{{style}}风格，顶部留出大字标题区域，动感构图，鲜艳{{colors}}配色，充满活力，视觉层次分明，印刷品质，为文字留负空间",
+    params: "--ar 2:3 海报比例 | --s 700 高风格化",
+    tags: ["海报", "活动", "宣传"],
+  },
+  {
+    id: "ip-book-cover",
+    title: "书籍封面",
+    description: "小说或非虚构类书籍的封面设计",
+    category: "poster",
+    platforms: ["Midjourney", "DALL·E"],
+    prompt: "Book cover design, {{genre}} genre, title \"{{title}}\", {{mood}} mood, evocative imagery, sophisticated color palette, space for title text at {{position}}, professional publishing quality, award-winning book design --ar 2:3 --v 6",
+    promptCn: "书籍封面设计，{{genre}}类型，书名\"{{title}}\"，{{mood}}氛围，富有感染力的意象，精致配色，{{position}}留出标题文字空间，专业出版品质，获奖级别书籍设计",
+    params: "--ar 2:3 书籍封面比例",
+    tags: ["书籍", "封面", "出版"],
+  },
+];
