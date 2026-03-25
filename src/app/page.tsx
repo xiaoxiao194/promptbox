@@ -29,7 +29,7 @@ export default function Home() {
           好 Prompt，好结果
         </h1>
         <p className="text-lg text-gray-500 dark:text-gray-400 mb-8">
-          精选 AI 提示词模板，一键复制到 ChatGPT / Claude / Kimi
+          填空式模板，小白也能写出专业提示词
         </p>
 
         {/* Search */}
