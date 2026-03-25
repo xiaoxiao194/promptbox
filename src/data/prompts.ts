@@ -975,6 +975,7 @@ README 结构：
       { key: "highlights", label: "核心卖点", placeholder: "例：20+分类、一键复制、变量填空" },
       { key: "audience", label: "目标用户", placeholder: "例：AI用户、自媒体创作者" },
     ],
+    hot: true,
   },
 
   // ===== 学习（补充） =====
